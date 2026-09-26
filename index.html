@@ -7,10 +7,10 @@
     <meta name="description" content="Cyber Explore by HeriKeyzenlocker — Eksplorasi dunia digital dari sudut negeri.">
     <meta property="og:title" content="Cyber Explore — HeriKeyzenlocker👑">
     <meta property="og:description" content="Cyber Explore — Lab pribadi, riset keamanan, dan edukasi oleh HeriKeyzenlocker.">
-    <meta property="og:image" content="https://c.top4top.io/p_3867pdpf00.png">
+    <meta property="og:image" content="https://files.catbox.moe/eyxe1p.jpg">
     <meta name="theme-color" content="#ff0000">
-    <link rel="icon" href="https://c.top4top.io/p_3867pdpf00.png" type="image/png">
-    <link rel="shortcut icon" href="https://c.top4top.io/p_3867pdpf00.png" type="image/x-icon">
+    <link rel="icon" href="https://files.catbox.moe/eyxe1p.jpg" type="image/jpeg">
+    <link rel="shortcut icon" href="https://files.catbox.moe/eyxe1p.jpg" type="image/jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         html, body {
@@ -53,11 +53,19 @@
             box-sizing: border-box;
         }
         img.logo {
-            width: clamp(300px, 50vw, 400px);
-            max-width: 90vw;
+            width: clamp(220px, 40vw, 300px);
+            height: clamp(220px, 40vw, 300px);
+            border-radius: 50%;
+            border: 3px solid red;
+            box-shadow: 0 0 30px red, 0 0 60px rgba(255,0,0,0.5);
             display: block;
             margin: 0 auto 25px;
-            object-fit: contain;
+            object-fit: cover;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px red, 0 0 60px rgba(255,0,0,0.5); }
+            50% { box-shadow: 0 0 50px red, 0 0 90px rgba(255,0,0,0.8); }
         }
         h1 {
             font-family: 'Orbitron', sans-serif;
@@ -135,19 +143,16 @@
         @media (max-width: 600px) {
             h1 { font-size: 1.4rem; }
             p, .tagline, .btn { font-size: 0.9rem; }
-            img.logo { width: clamp(250px, 50vw, 300px); }
+            img.logo { width: clamp(180px, 45vw, 220px); height: clamp(180px, 45vw, 220px); }
         }
     </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return false;" onmousedown="return false;">
 
-    <!-- Matrix Rain Canvas -->
     <canvas id="matrixCanvas" width="501" height="668"></canvas>
 
-    <!-- Audio Player -->
     <audio id="lagu" src="https://i.top4top.io/m_3159n9kn80.mp3" autoplay loop></audio>
 
-    <!-- Fix for Mobile Audio Autoplay -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const audio = document.getElementById('lagu');
@@ -159,9 +164,8 @@
         });
     </script>
 
-    <!-- Main Content -->
     <div class="content">
-        <img src="https://c.top4top.io/p_3867pdpf00.png" class="logo" alt="Cyber Explore Logo">
+        <img src="https://files.catbox.moe/eyxe1p.jpg" class="logo" alt="HeriKeyzenlocker">
 
         <h1>CYBER EXPLORE — HERIKEYZENLOCKER👑</h1>
 
@@ -203,7 +207,6 @@
         <div class="footer">© 2026 | CYBER EXPLORE HERIKEYZENLOCKER👑 | All rights reserved</div>
     </div>
 
-    <!-- Clock Script -->
     <script>
         function showTime() {
             const now = new Date();
@@ -220,7 +223,6 @@
         showTime();
     </script>
 
-    <!-- Matrix Rain Script -->
     <script>
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
