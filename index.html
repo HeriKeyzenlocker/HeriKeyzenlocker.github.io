@@ -46,38 +46,38 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            padding: 40px 20px 40px;
+            padding: 30px 15px 40px;
             max-width: 95vw;
             width: 100%;
             box-sizing: border-box;
         }
-
-        /* === ASCII ROTATING === */
-        .ascii-box {
-            color: red;
-            font-size: 5px;
-            line-height: 1.05;
-            text-shadow: 0 0 10px red;
-            overflow-x: auto;
-            margin: 10px 0 20px;
+        .ascii-terminal {
+            color: #0f0;
+            font-size: 3.5px;
+            line-height: 1.02;
+            text-shadow: 0 0 6px #0f0;
             white-space: pre;
             font-family: monospace;
-            min-height: 200px;
+            text-align: left;
+            overflow-x: auto;
+            padding: 10px 5px;
+            margin: 0;
+            min-height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: opacity 0.8s ease;
         }
-        .ascii-box.fade { opacity: 0; }
+        .ascii-terminal.fade { opacity: 0; }
 
         img.logo {
-            width: clamp(180px, 40vw, 240px);
-            height: clamp(180px, 40vw, 240px);
+            width: clamp(160px, 35vw, 220px);
+            height: clamp(160px, 35vw, 220px);
             border-radius: 50%;
             border: 3px solid red;
             box-shadow: 0 0 30px red, 0 0 60px rgba(255,0,0,0.5);
             display: block;
-            margin: 10px auto 20px;
+            margin: 20px auto;
             object-fit: cover;
             animation: pulse 2s infinite;
         }
@@ -125,7 +125,7 @@
             background: #0a0a0a;
             border-radius: 10px;
             border: 1px solid #333;
-            max-width: 600px;
+            max-width: 95vw;
             margin: 20px auto;
             overflow: hidden;
             box-shadow: 0 0 40px rgba(0,255,0,0.2);
@@ -144,7 +144,7 @@
         .dot.green { background: #27c93f; }
         .terminal-title { color: #888; font-size: 11px; margin-left: 10px; }
         .terminal-body {
-            padding: 18px;
+            padding: 12px;
             font-family: 'Share Tech Mono', monospace;
             font-size: 13px;
             line-height: 1.8;
@@ -159,7 +159,7 @@
             color: #0f0;
             height: 180px;
             overflow: hidden;
-            max-width: 600px;
+            max-width: 95vw;
             margin: 20px auto;
             text-align: left;
             box-shadow: 0 0 20px rgba(0,255,0,0.3);
@@ -220,8 +220,8 @@
         @media (max-width: 600px) {
             h1 { font-size: 1.3rem; }
             p { font-size: 0.85rem; }
-            .ascii-box { font-size: 3px; min-height: 160px; }
-            .terminal-body { font-size: 11px; padding: 12px; }
+            .ascii-terminal { font-size: 2.5px; min-height: 200px; }
+            .terminal-body { font-size: 11px; padding: 10px; }
             .hacklog { font-size: 10px; height: 150px; }
         }
     </style>
@@ -235,15 +235,7 @@
 
     <div class="content">
 
-        <!-- ASCII ROTATING -->
-        <div class="ascii-box" id="asciiBox"></div>
-
-        <img src="https://files.catbox.moe/eyxe1p.jpg" class="logo" alt="HeriKeyzenlocker">
-
-        <h1 data-text="CYBER EXPLORE — HERIKEYZENLOCKER👑">CYBER EXPLORE — HERIKEYZENLOCKER👑</h1>
-
-        <p>We are <span class="highlight">CYBER EXPLORE HERIKEYZENLOCKER</span></p>
-
+        <!-- TERMINAL DENGAN ASCII MUTER DI DALAM -->
         <div class="terminal">
             <div class="terminal-bar">
                 <div class="dot red"></div>
@@ -252,10 +244,21 @@
                 <span class="terminal-title">herikeyzenlocker@cyber-explore:~</span>
             </div>
             <div class="terminal-body">
-                <div style="color:#0f0;">┌──[herikeyzenlocker@banjaran-sudom]─[~]</div>
-                <div style="color:#0f0;">└─$ <span id="typing"></span><span class="blink">█</span></div>
+                <div style="color:#0f0; font-size: 12px; margin-bottom: 8px;">┌──[herikeyzenlocker@banjaran-sudom]─[~]</div>
+                <div style="color:#0f0; font-size: 12px; margin-bottom: 10px;">└─$ cat cyber-explore.txt</div>
+
+                <!-- ASCII ROTATING DI DALAM TERMINAL -->
+                <pre class="ascii-terminal" id="asciiBox"></pre>
+
+                <div style="color:#0f0; font-size: 12px; margin-top: 10px;">└─$ <span id="typing"></span><span class="blink">█</span></div>
             </div>
         </div>
+
+        <img src="https://files.catbox.moe/eyxe1p.jpg" class="logo" alt="HeriKeyzenlocker">
+
+        <h1 data-text="CYBER EXPLORE — HERIKEYZENLOCKER👑">CYBER EXPLORE — HERIKEYZENLOCKER👑</h1>
+
+        <p>We are <span class="highlight">CYBER EXPLORE HERIKEYZENLOCKER</span></p>
 
         <p style="max-width: 600px; margin: 20px auto; text-align: justify;">
             Ini bukan sekadar nama, ini sebuah perjalanan. Cyber Explore adalah ruang belajar, riset,
@@ -298,16 +301,22 @@
     </div>
 
     <script>
-        // ================== 3 ASCII ART ==================
+        // ================== 3 ASCII ART (MUTER) ==================
         const asciiArts = [
-` ██████╗██╗   ██╗██████╗ ███████╗██████╗ 
-██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗
-██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝
-██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗
-╚██████╗   ██║   ██████╔╝███████╗██║  ██║
- ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝
-        E X P L O R E  —  HERIKEYZENLOCKER`,
+// ASCII 1 — Burung besar / elang
+` ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
+ ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
+ ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
+ ⠀⠀⢤⣀⣀⣀⠀⠀⢸⣷⡄⠀⣁⣀⣤⣴⣿⣿⣿⣆
+ ⠀⠀⠀⠀⠹⠏⠀⠀⠀⣿⣧⠀⠹⣿⣿⣿⣿⣿⡿⣿
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⠇⢀⣼⣿⣿⠛⢯⡿⡟
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠦⠴⢿⢿⣿⡿⠷⠀⣿⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠙⣷⣶⣶⣤⣤⣤⣤⣤⣶⣦⠃⠀
+ ⠀⠀⠀⠀⠀⠀⠀⢐⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁`,
 
+// ASCII 2 — Burung besar (versi 2)
 `⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠁  ⠈⠉⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟         ⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⡟            ⠈⢻⣿⣿⣿⣿⣿⣿⣿
@@ -322,7 +331,8 @@
 ⡿⠟⠛⠉⠉       ⠈⢻⣿⡀ ⣿⠏         ⠈⠉
               ⠉⠁ ⠁`,
 
-`⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼
+// ASCII 3 — Burung elang besar (yang lu kirim pertama)
+`⢰⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼
 ⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⠴⠶⠖⠒⠛⣿⣽⡟⠛⠓⠒⠶⠶⢤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠴⣯⠏
 ⠀⠀⢿⣯⣿⠷⣶⣤⡴⣶⣶⣤⠤⠤⣤⣄⡀⠀⣀⡤⠶⠛⠉⠀⠀⠀⠀⠀⠀⠴⠿⣼⠿⠦⠀⠀⠀⠀⠀⠀⠉⠛⠲⢦⣄⣀⣤⣴⠒⣻⣿⣿⢻⣿⣿⣿⠋⣩⣴⠋⠀
 ⠀⠀⠀⠙⠿⣦⣼⣟⢷⣷⢹⣿⣌⣿⡟⢺⣿⠛⠻⣄⠀⠀⠀⠀⢀⣠⣤⠤⠖⠒⠒⠛⠒⠒⠒⠦⠤⣤⣀⠀⠀⢀⣤⠖⠛⢿⣇⠐⡾⣷⣿⡟⢚⣿⣷⣿⠶⠋⠁⠀⠀
