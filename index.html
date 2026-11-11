@@ -8,7 +8,7 @@
     <meta property="og:title" content="Cyber Explore — HeriKeyzenlocker👑">
     <meta property="og:description" content="Cyber Explore — Lab pribadi, riset keamanan, dan edukasi oleh HeriKeyzenlocker.">
     <meta property="og:image" content="https://files.catbox.moe/eyxe1p.jpg">
-    <meta name="theme-color" content="#ff0000">
+    <meta name="theme-color" content="#000000">
     <link rel="icon" href="https://files.catbox.moe/eyxe1p.jpg" type="image/jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
@@ -18,27 +18,25 @@
             width: 100%;
             min-height: 100%;
             font-family: 'Share Tech Mono', monospace;
-            background: url('https://k.top4top.io/p_3490c2wv80.jpg') no-repeat center center fixed;
-            background-size: cover;
+            /* Background diganti jadi hitam pekat dengan grid hacker, biar ga error link */
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
             color: white;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
             overflow-y: auto;
-            animation: lightning 5s infinite;
-        }
-        @keyframes lightning {
-            0%, 97%, 100% { filter: brightness(1); }
-            98% { filter: brightness(3); }
-            99% { filter: brightness(0.2); }
         }
         canvas#matrixCanvas {
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1;
-            opacity: 0.3;
+            opacity: 0.4; /* Dibikin lebih jelas */
             pointer-events: none;
             filter: drop-shadow(0 0 3px #0f0);
         }
@@ -51,18 +49,20 @@
             width: 100%;
             box-sizing: border-box;
         }
+        
+        /* Terminal ASCII */
         .ascii-terminal {
             color: #0f0;
-            font-size: 3.5px;
-            line-height: 1.02;
-            text-shadow: 0 0 6px #0f0;
+            font-size: 4px; /* Sedikit dibesarkan dari sebelumnya 3.5px */
+            line-height: 1.05;
+            text-shadow: 0 0 8px #0f0;
             white-space: pre;
             font-family: monospace;
             text-align: left;
             overflow-x: auto;
             padding: 10px 5px;
             margin: 0;
-            min-height: 250px;
+            min-height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -87,7 +87,7 @@
         }
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin: 10px 0;
             color: #fff;
             position: relative;
@@ -105,30 +105,31 @@
         h1::after  { color: #00ffff; animation: glitch-2 0.3s infinite; z-index: -2; }
         @keyframes glitch-1 {
             0% { transform: translate(0); }
-            20% { transform: translate(-3px, 2px); }
-            40% { transform: translate(-3px, -2px); }
-            60% { transform: translate(3px, 2px); }
-            80% { transform: translate(3px, -2px); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
         @keyframes glitch-2 {
             0% { transform: translate(0); }
-            20% { transform: translate(3px, -2px); }
-            40% { transform: translate(3px, 2px); }
-            60% { transform: translate(-3px, -2px); }
-            80% { transform: translate(-3px, 2px); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(-2px, 2px); }
             100% { transform: translate(0); }
         }
         p { font-size: 0.95rem; margin: 10px 0; }
         .highlight { color: red; font-weight: bold; }
+        
         .terminal {
-            background: #0a0a0a;
+            background: #000000; /* Hitam pekat biar kontras */
             border-radius: 10px;
             border: 1px solid #333;
             max-width: 95vw;
             margin: 20px auto;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(0,255,0,0.2);
+            box-shadow: 0 0 40px rgba(0,255,0,0.15);
             text-align: left;
         }
         .terminal-bar {
@@ -149,6 +150,7 @@
             font-size: 13px;
             line-height: 1.8;
         }
+        
         .hacklog {
             background: rgba(0,0,0,0.9);
             border: 1px solid #0f0;
@@ -166,6 +168,7 @@
         }
         .hacklog div { animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateX(-5px); } to { opacity: 1; transform: translateX(0); } }
+        
         #breach {
             position: fixed;
             top: 20px;
@@ -182,12 +185,15 @@
             display: none;
             animation: shake 0.5s infinite;
             max-width: 80vw;
+            left: 50%;
+            transform: translateX(-50%); /* Biar di tengah pas di HP */
         }
         @keyframes shake {
-            0%, 100% { transform: translate(0); }
-            25% { transform: translate(-2px, 2px); }
-            75% { transform: translate(2px, -2px); }
+            0%, 100% { transform: translateX(-50%) translate(0); }
+            25% { transform: translateX(-50%) translate(-2px, 2px); }
+            75% { transform: translateX(-50%) translate(2px, -2px); }
         }
+        
         .marquee-container { margin: 20px auto; overflow: hidden; white-space: nowrap; max-width: 95vw; }
         .marquee-text {
             display: inline-block;
@@ -217,10 +223,11 @@
         .btn:hover { background: red; color: black; }
         #clock, #date { margin-top: 15px; font-size: 1.1rem; color: #0f0; }
         .footer { font-size: 0.75rem; color: #888; margin-top: 30px; padding-bottom: 20px; }
+        
         @media (max-width: 600px) {
             h1 { font-size: 1.3rem; }
             p { font-size: 0.85rem; }
-            .ascii-terminal { font-size: 2.5px; min-height: 200px; }
+            .ascii-terminal { font-size: 3px; min-height: 180px; }
             .terminal-body { font-size: 11px; padding: 10px; }
             .hacklog { font-size: 10px; height: 150px; }
         }
@@ -231,11 +238,11 @@
     <canvas id="matrixCanvas"></canvas>
     <audio id="lagu" src="https://i.top4top.io/m_3159n9kn80.mp3" autoplay loop></audio>
 
-    <div id="breach">⚠️ SYSTEM BREACH DETECTED — ACCESS GRANTED</div>
+    <div id="breach">⚠️ SYSTEM BREACH DETECTED</div>
 
     <div class="content">
 
-        <!-- TERMINAL DENGAN ASCII MUTER DI DALAM -->
+        <!-- TERMINAL -->
         <div class="terminal">
             <div class="terminal-bar">
                 <div class="dot red"></div>
@@ -247,7 +254,7 @@
                 <div style="color:#0f0; font-size: 12px; margin-bottom: 8px;">┌──[herikeyzenlocker@banjaran-sudom]─[~]</div>
                 <div style="color:#0f0; font-size: 12px; margin-bottom: 10px;">└─$ cat cyber-explore.txt</div>
 
-                <!-- ASCII ROTATING DI DALAM TERMINAL -->
+                <!-- ASCII ROTATING -->
                 <pre class="ascii-terminal" id="asciiBox"></pre>
 
                 <div style="color:#0f0; font-size: 12px; margin-top: 10px;">└─$ <span id="typing"></span><span class="blink">█</span></div>
@@ -301,9 +308,8 @@
     </div>
 
     <script>
-        // ================== 3 ASCII ART (MUTER) ==================
+        // 3 ASCII ART
         const asciiArts = [
-// ASCII 1 — Burung besar / elang
 ` ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
  ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
  ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
@@ -316,7 +322,6 @@
  ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁`,
 
-// ASCII 2 — Burung besar (versi 2)
 `⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠁  ⠈⠉⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟         ⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⡟            ⠈⢻⣿⣿⣿⣿⣿⣿⣿
@@ -331,7 +336,6 @@
 ⡿⠟⠛⠉⠉       ⠈⢻⣿⡀ ⣿⠏         ⠈⠉
               ⠉⠁ ⠁`,
 
-// ASCII 3 — Burung elang besar (yang lu kirim pertama)
 `⢰⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼
 ⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⠴⠶⠖⠒⠛⣿⣽⡟⠛⠓⠒⠶⠶⢤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠴⣯⠏
 ⠀⠀⢿⣯⣿⠷⣶⣤⡴⣶⣶⣤⠤⠤⣤⣄⡀⠀⣀⡤⠶⠛⠉⠀⠀⠀⠀⠀⠀⠴⠿⣼⠿⠦⠀⠀⠀⠀⠀⠀⠉⠛⠲⢦⣄⣀⣤⣴⠒⣻⣿⣿⢻⣿⣿⣿⠋⣩⣴⠋⠀
@@ -378,7 +382,6 @@
         }
         showAscii();
         setInterval(showAscii, 5000);
-        // =================================================
 
         document.addEventListener('DOMContentLoaded', function () {
             const audio = document.getElementById('lagu');
