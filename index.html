@@ -18,7 +18,7 @@
             width: 100%;
             min-height: 100%;
             font-family: 'Share Tech Mono', monospace;
-            /* BACKGROUND BARU */
+            /* Background pakai link catbox lu */
             background: url('https://files.catbox.moe/buojrv.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
@@ -45,7 +45,8 @@
             max-width: 95vw;
             width: 100%;
             box-sizing: border-box;
-            background: rgba(0,0,0,0.65); /* Kotak hitam di belakang teks biar kebaca */
+            /* Gua naikin transparansinya jadi 0.75 biar teks makin jelas di background merah */
+            background: rgba(0,0,0,0.75); 
             border-radius: 15px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -230,7 +231,7 @@
 
     <canvas id="matrixCanvas"></canvas>
     
-    <!-- AUDIO BARU -->
+    <!-- Audio pakai link Cloudflare Tunnel lu -->
     <audio id="lagu" src="https://millions-island-consumers-necklace.trycloudflare.com/audio/audio_164130.mp3" autoplay loop></audio>
 
     <div id="breach">⚠️ SYSTEM BREACH DETECTED — ACCESS GRANTED</div>
@@ -303,6 +304,13 @@
     </div>
 
     <script>
+        // Autoplay Audio Fix
+        document.addEventListener('DOMContentLoaded', function () {
+            const audio = document.getElementById('lagu');
+            const playAudio = () => { audio.play().catch(() => {}); document.removeEventListener('click', playAudio); };
+            document.addEventListener('click', playAudio);
+        });
+
         // ================== 3 ASCII ART (MUTER) ==================
         const asciiArts = [
 ` ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
@@ -377,12 +385,6 @@
         }
         showAscii();
         setInterval(showAscii, 5000);
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const audio = document.getElementById('lagu');
-            const playAudio = () => { audio.play().catch(() => {}); document.removeEventListener('click', playAudio); };
-            document.addEventListener('click', playAudio);
-        });
 
         function showTime() {
             const now = new Date();
