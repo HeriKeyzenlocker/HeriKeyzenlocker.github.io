@@ -18,8 +18,8 @@
             width: 100%;
             min-height: 100%;
             font-family: 'Share Tech Mono', monospace;
-            /* Background stabil dari Unsplash */
-            background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop') no-repeat center center fixed;
+            /* BACKGROUND BARU */
+            background: url('https://files.catbox.moe/buojrv.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
             display: flex;
@@ -45,7 +45,7 @@
             max-width: 95vw;
             width: 100%;
             box-sizing: border-box;
-            background: rgba(0,0,0,0.6); /* Lapisan gelap biar teks kebaca */
+            background: rgba(0,0,0,0.65); /* Kotak hitam di belakang teks biar kebaca */
             border-radius: 15px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -230,7 +230,8 @@
 
     <canvas id="matrixCanvas"></canvas>
     
-    <!-- AUDIO UDAH DIHAPUS DARI SINI -->
+    <!-- AUDIO BARU -->
+    <audio id="lagu" src="https://millions-island-consumers-necklace.trycloudflare.com/audio/audio_164130.mp3" autoplay loop></audio>
 
     <div id="breach">⚠️ SYSTEM BREACH DETECTED — ACCESS GRANTED</div>
 
@@ -290,6 +291,8 @@
                 Ngobrol Santuy Sama Bos
             </button>
         </div>
+        
+        <p style="font-size: 0.75rem; color: #888; margin-top: 10px;">(Klik di mana saja pada layar jika musik belum berputar)</p>
 
         <p>Tagline <span class="highlight">#CYBER_EXPLORE #HERIKEYZENLOCKER #DIGITAL_EXPLORER</span></p>
 
@@ -374,6 +377,12 @@
         }
         showAscii();
         setInterval(showAscii, 5000);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const audio = document.getElementById('lagu');
+            const playAudio = () => { audio.play().catch(() => {}); document.removeEventListener('click', playAudio); };
+            document.addEventListener('click', playAudio);
+        });
 
         function showTime() {
             const now = new Date();
