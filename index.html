@@ -7,11 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: #000;
@@ -25,18 +21,14 @@
             position: relative;
         }
 
-        /* Matrix Background */
         canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             opacity: 0.4;
         }
 
-        /* Container Utama */
         .content {
             position: relative;
             z-index: 10;
@@ -51,7 +43,6 @@
             transition: opacity 0.1s ease;
         }
 
-        /* Logo */
         .logo-container {
             width: 180px;
             height: 180px;
@@ -67,12 +58,11 @@
         }
 
         .logo-container img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
         }
 
-        /* Visualizer Audio */
+        /* Visualizer */
         .audio-visualizer {
             display: flex;
             justify-content: center;
@@ -91,7 +81,6 @@
             transition: height 0.1s ease;
         }
 
-        /* Judul */
         .title {
             font-size: 28px;
             font-weight: bold;
@@ -109,7 +98,6 @@
             margin-bottom: 15px;
         }
 
-        /* Teks Paragraf */
         .desc-text {
             font-size: 13px;
             line-height: 1.6;
@@ -118,7 +106,6 @@
             text-shadow: 0 0 3px #0f0;
         }
 
-        /* Quote */
         .quote {
             font-size: 16px;
             font-weight: bold;
@@ -128,7 +115,6 @@
             font-style: italic;
         }
 
-        /* Terminal Box */
         .terminal-box {
             background-color: rgba(0, 0, 0, 0.5);
             border: 1px solid #0f0;
@@ -146,7 +132,6 @@
         .terminal-box span.success { color: #0f0; }
         .terminal-box span.info { color: #0ff; }
 
-        /* Tombol */
         .btn {
             margin-top: 15px;
             padding: 12px 30px;
@@ -165,88 +150,55 @@
             display: inline-block;
         }
 
-        .btn:hover {
-            background: #f00;
-            color: #000;
-            box-shadow: 0 0 30px #f00;
-        }
+        .btn:hover { background: #f00; color: #000; box-shadow: 0 0 30px #f00; }
 
-        /* Footer */
-        .footer {
-            font-size: 12px;
-            margin-top: 20px;
-            color: #fff;
-        }
-        .footer span {
-            color: #f00;
-        }
-        
-        .tagline {
-            font-size: 10px;
-            color: #555;
-            margin-top: 5px;
-            margin-bottom: 30px;
-        }
+        .footer { font-size: 12px; margin-top: 20px; color: #fff; }
+        .tagline { font-size: 10px; color: #555; margin-top: 5px; margin-bottom: 30px; }
     </style>
 </head>
 <body>
 
-    <!-- Audio Lu -->
-    <audio id="lagu" src="https://institute-though-treatment-theft.trycloudflare.com/audio/audio_193812.mp3" autoplay loop crossorigin="anonymous"></audio>
-
     <!-- Canvas Matrix Rain -->
     <canvas id="matrix"></canvas>
 
-    <!-- Gambar Jumpscare (Tersembunyi di awal) -->
+    <!-- Gambar Jumpscare -->
     <div id="glitch-img" style="
-        position: fixed;
-        top: 0; left: 0;
+        position: fixed; top: 0; left: 0;
         width: 100vw; height: 100vh;
         background-image: url('https://files.catbox.moe/wnsqeh.jpg');
-        background-size: cover;
-        background-position: center;
-        z-index: 9999;
-        opacity: 0;
-        pointer-events: none;
+        background-size: cover; background-position: center;
+        z-index: 9999; opacity: 0; pointer-events: none;
     "></div>
 
     <!-- Konten Utama -->
     <div class="content" id="main-content">
         
-        <!-- Logo -->
         <div class="logo-container">
             <img src="https://files.catbox.moe/eyxe1p.jpg" alt="Logo">
         </div>
 
-        <!-- Visualizer Audio -->
         <div class="audio-visualizer" id="visualizer">
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
             <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
             <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
 
         <p style="font-size: 10px; color: #888;">(Sentuh/Klik layar jika musik belum berputar)</p>
 
-        <!-- Judul -->
         <div>
             <h1 class="title">CYBER EXPLORE</h1>
             <h1 class="title" style="margin-top: -5px;">HERIKEYZENLOCKER👑</h1>
             <p class="subtitle">We are CYBER EXPLORE HERIKEYZENLOCKER</p>
         </div>
 
-        <!-- Paragraf -->
         <p class="desc-text">
             Ini bukan sekadar nama, ini sebuah perjalanan. Cyber Explore adalah ruang belajar, riset, dan eksplorasi dunia digital yang gua bangun dari nol. Dari sudut negeri yang jauh dari hiruk pikuk kota, gua buktiin kalau anak pelosok juga bisa nyentuh dunia cyber. Ga ada sekolah formal, ga ada mentor, cuma ada niat, HP 2GB RAM, dan otak yang ga mau berhenti mikir. Di sini gua pelajari jaringan, sistem, kode, dan keamanan — semua untuk lab pribadi dan edukasi. Setiap baris kode adalah pelajaran, setiap error adalah guru. Gua ga nyerang, gua belajar. Gua ga ngerusak, gua paham. Karena ilmu yang bener bukan buat nyakitin, tapi buat ngelindungin.
         </p>
 
-        <!-- Quote -->
         <p class="quote">"Belajar Tanpa Batas, Berkarya Tanpa Henti."</p>
 
-        <!-- Terminal Path -->
         <p style="font-size: 11px; margin-bottom: 10px; text-align: left; width: 100%;">┌─[herikeyzenlocker@banjaran-sudom]─[~]</p>
         <p style="font-size: 11px; margin-bottom: 20px; text-align: left; width: 100%;">└─$ <span class="quote">whoami</span> && echo 'Raja Setan dari Banjaran Sudom' && uname -a</p>
 
-        <!-- Terminal Box -->
         <div class="terminal-box">
             <span class="warning">[!] Warning: Do not use for illegal activity.</span><br>
             <span class="success">[✓] Safe Zone Mode: ACTIVE</span><br>
@@ -261,13 +213,15 @@
         <p style="margin-top: 20px; font-size: 12px;">Special Thanks To: <span style="color:#f00;">HERIK</span></p>
         <p style="font-size: 11px; margin-top: 5px;">We Explore The Digital World Since 2022.</p>
 
-        <!-- Tombol -->
         <a href="https://t.me/+gwdAGj6qGGkyMGM1" class="btn">Ngobrol Santuy Sama Bos</a>
-
-        <!-- Tagline -->
         <p class="tagline">Tagline #CYBER_EXPLORE #HERIKEYZENLOCKER</p>
 
     </div>
+
+    <!-- AUDIO TARUH DI SINI (BUKAN DI HEAD) -->
+    <audio id="bgAudio" loop autoplay>
+        <source src="https://institute-though-treatment-theft.trycloudflare.com/audio/audio_193812.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Script Matrix Rain -->
     <script>
@@ -299,7 +253,6 @@
     <script>
         const glitchImg = document.getElementById('glitch-img');
         const mainContent = document.getElementById('main-content');
-
         setInterval(() => {
             mainContent.style.opacity = '0'; 
             glitchImg.style.opacity = '1'; 
@@ -310,34 +263,43 @@
         }, 3000);
     </script>
 
-    <!-- SCRIPT BUAT NGUBAH AUDIO & VISUALIZER -->
+    <!-- SCRIPT LOGIKA AUDIO & VISUALIZER (DIAMBIL DARI HTML PEMANGGIL) -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const audio = document.getElementById('lagu');
+        (function() {
+            const audio = document.getElementById('bgAudio');
             const visualizer = document.getElementById('visualizer');
             const bars = visualizer.querySelectorAll('.bar');
             
-            // 1. PEMBUKA BLOKIRAN AUTOPLAY (Nunggu klik pertama)
-            const playAudio = () => { 
-                audio.play().catch(() => {}); 
-                document.removeEventListener('click', playAudio); 
-            };
-            document.addEventListener('click', playAudio);
+            // Set volume biar ga kaget
+            audio.volume = 0.6;
 
-            // 2. SETUP WEB AUDIO API BUAT VISUALIZER
+            // 1. LOGIKA AUTOPLAY (Dari kode Khilafah Hackers)
+            audio.play().catch(() => {
+                const enableAudio = () => {
+                    audio.play();
+                    document.removeEventListener('click', enableAudio);
+                    document.removeEventListener('touchstart', enableAudio);
+                };
+                // Pasang listener di seluruh layar
+                document.addEventListener('click', enableAudio);
+                document.addEventListener('touchstart', enableAudio);
+            });
+
+            // 2. VISUALIZER LOGIC
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             const analyser = audioCtx.createAnalyser();
             const source = audioCtx.createMediaElementSource(audio);
             source.connect(analyser);
             analyser.connect(audioCtx.destination);
             analyser.fftSize = 64; 
+
             const bufferLength = analyser.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
 
-            function animateBars() {
-                requestAnimationFrame(animateBars);
+            function animate() {
+                requestAnimationFrame(animate);
                 analyser.getByteFrequencyData(dataArray);
-                
+
                 if (audio.paused) {
                     bars.forEach(bar => bar.style.height = '5px');
                     return;
@@ -349,8 +311,8 @@
                     bar.style.height = `${value}px`;
                 });
             }
-            animateBars();
-        });
+            animate();
+        })();
     </script>
 </body>
 </html>
