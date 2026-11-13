@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Explore - HeriKeyzenlocker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Share Tech Mono', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Matrix Background */
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transition: opacity 0.1s ease;
+        }
+
+        /* Logo */
+        .logo-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #f00;
+            box-shadow: 0 0 20px #f00, inset 0 0 20px #f00;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            margin-top: 20px;
+        }
+
+        .logo-container img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px #f00, 0 0 20px #f00;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            margin-top: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #f00;
+            text-shadow: 0 0 5px #f00;
+            margin-bottom: 15px;
+        }
+
+        .desc-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #0f0;
+            text-align: left;
+            text-shadow: 0 0 3px #0f0;
+        }
+
+        .quote {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f00;
+            text-shadow: 0 0 8px #f00;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        /* Terminal Box */
+        .terminal-box {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 12px;
+            width: 100%;
+            color: #0f0;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            backdrop-filter: blur(4px);
+            margin-top: 10px;
+        }
+
+        .terminal-box span.warning { color: #f00; }
+        .terminal-box span.success { color: #0f0; }
+        .terminal-box span.info { color: #0ff; }
+        
+        .typing-cursor::after {
+            content: '█'; color: #0f0;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ASCII Muter */
+        .ascii-box {
+            color: #0f0;
+            font-size: 3.5px;
+            line-height: 1.02;
+            text-shadow: 0 0 6px #0f0;
+            white-space: pre;
+            font-family: monospace;
+            text-align: left;
+            overflow-x: auto;
+            margin: 15px 0;
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease;
+        }
+        .ascii-box.fade { opacity: 0; }
+
+        /* Jam & Tanggal */
+        #clock, #date { 
+            margin-top: 5px; 
+            font-size: 1.1rem; 
+            color: #0f0; 
+            text-shadow: 0 0 5px #0f0;
+        }
+
+        .btn {
+            margin-top: 15px;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid #f00;
+            color: #fff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 10px #f00;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover { background: #f00; color: #000; box-shadow: 0 0 30px #f00; }
+
+        .footer { font-size: 12px; margin-top: 20px; color: #fff; }
+        .tagline { font-size: 10px; color: #555; margin-top: 5px; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Matrix Rain -->
+    <canvas id="matrix"></canvas>
+
+    <!-- Gambar Jumpscare (Tersembunyi) -->
+    <div id="glitch-img" style="
+        position: fixed; top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background-image: url('https://files.catbox.moe/wnsqeh.jpg');
+        background-size: cover; background-position: center;
+        z-index: 9999; opacity: 0; pointer-events: none;
+    "></div>
+
+    <!-- Konten Utama -->
+    <div class="content" id="main-content">
+        
+        <div class="logo-container">
+            <img src="https://files.catbox.moe/eyxe1p.jpg" alt="Logo">
+        </div>
+
+        <div>
+            <h1 class="title">CYBER EXPLORE</h1>
+            <h1 class="title" style="margin-top: -5px;">HERIKEYZENLOCKER👑</h1>
+            <p class="subtitle">We are CYBER EXPLORE HERIKEYZENLOCKER</p>
+        </div>
+
+        <p class="desc-text">
+            Ini bukan sekadar nama, ini sebuah perjalanan. Cyber Explore adalah ruang belajar, riset, dan eksplorasi dunia digital yang gua bangun dari nol. Dari sudut negeri yang jauh dari hiruk pikuk kota, gua buktiin kalau anak pelosok juga bisa nyentuh dunia cyber. Ga ada sekolah formal, ga ada mentor, cuma ada niat, HP 2GB RAM, dan otak yang ga mau berhenti mikir. Di sini gua pelajari jaringan, sistem, kode, dan keamanan — semua untuk lab pribadi dan edukasi. Setiap baris kode adalah pelajaran, setiap error adalah guru. Gua ga nyerang, gua belajar. Gua ga ngerusak, gua paham. Karena ilmu yang bener bukan buat nyakitin, tapi buat ngelindungin.
+        </p>
+
+        <p class="quote">"Belajar Tanpa Batas, Berkarya Tanpa Henti."</p>
+
+        <!-- TERMINAL BOX DENGAN ASCII & EFEK KETIK -->
+        <div class="terminal-box">
+            <p style="font-size: 11px; margin-bottom: 5px;">┌─[herikeyzenlocker@banjaran-sudom]─[~]</p>
+            <p style="font-size: 11px; margin-bottom: 15px;">└─$ <span class="quote">whoami</span> && echo 'Raja Setan' && <span id="typing"></span><span class="typing-cursor"></span></p>
+
+            <!-- ASCII MUTER -->
+            <pre class="ascii-box" id="asciiBox"></pre>
+
+            <span class="warning">[!] Warning: Do not use for illegal activity.</span><br>
+            <span class="success">[✓] Safe Zone Mode: ACTIVE</span><br>
+            <span class="success">[✓] Welcome, HeriKeyzenlocker 👑</span><br>
+            <span class="info">[*] Initializing Cyber Explore v98.1...</span><br>
+        </div>
+
+        <p style="margin-top: 20px; font-size: 12px;">Special Thanks To: <span style="color:#f00;">HERIK</span></p>
+        <p style="font-size: 11px; margin-top: 5px;">We Explore The Digital World Since 2022.</p>
+
+        <!-- JAM & TANGGAL BALIK LAGI -->
+        <div id="clock">--:--:--</div>
+        <div id="date">Loading...</div>
+
+        <a href="https://t.me/+gwdAGj6qGGkyMGM1" class="btn">Ngobrol Santuy Sama Bos</a>
+        <p class="tagline">Tagline #CYBER_EXPLORE #HERIKEYZENLOCKER</p>
+
+    </div>
+
+    <script>
+        // ================== 3 ASCII ART (MUTER) ==================
+        const asciiArts = [
+` ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
+ ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
+ ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
+ ⠀⠀⢤⣀⣀⣀⠀⠀⢸⣷⡄⠀⣁⣀⣤⣴⣿⣿⣿⣆
+ ⠀⠀⠀⠀⠹⠏⠀⠀⠀⣿⣧⠀⠹⣿⣿⣿⣿⣿⡿⣿
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⠇⢀⣼⣿⣿⠛⢯⡿⡟
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠦⠴⢿⢿⣿⡿⠷⠀⣿⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠙⣷⣶⣶⣤⣤⣤⣤⣤⣶⣦⠃⠀
+ ⠀⠀⠀⠀⠀⠀⠀⢐⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
+ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁`,
+
+`⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠁  ⠈⠉⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟         ⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⡟            ⠈⢻⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⡟     ⢀⣠⣤⣤⣤⣤⣄   ⠹⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⠁    ⠾⣿⣿⣿⣿⠿⠛⠉    ⠘⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡏   ⣤⣶⣤⣉⣿⣿⡯⣀⣴⣿⡗    ⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡇   ⡈  ⠉⣿⣿⣶⡉  ⣀⡀   ⢻⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⡇  ⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇   ⢸⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿   ⠉⢉⣽⣿⠿⣿⡿⢻⣯⡍⢁⠄   ⣸⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⡄  ⠐⡀⢉⠉ ⠠ ⢉⣉ ⡜    ⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⠿⠁   ⠘⣤⣭⣟⠛⠛⣉⣁⡜     ⠛⠿⣿⣿⣿
+⡿⠟⠛⠉⠉       ⠈⢻⣿⡀ ⣿⠏         ⠈⠉
+              ⠉⠁ ⠁`,
+
+`⢰⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼
+⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⠴⠶⠖⠒⠛⣿⣽⡟⠛⠓⠒⠶⠶⢤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠴⣯⠏
+⠀⠀⢿⣯⣿⠷⣶⣤⡴⣶⣶⣤⠤⠤⣤⣄⡀⠀⣀⡤⠶⠛⠉⠀⠀⠀⠀⠀⠀⠴⠿⣼⠿⠦⠀⠀⠀⠀⠀⠀⠉⠛⠲⢦⣄⣀⣤⣴⠒⣻⣿⣿⢻⣿⣿⣿⠋⣩⣴⠋⠀
+⠀⠀⠀⠙⠿⣦⣼⣟⢷⣷⢹⣿⣌⣿⡟⢺⣿⠛⠻⣄⠀⠀⠀⠀⢀⣠⣤⠤⠖⠒⠒⠛⠒⠒⠒⠦⠤⣤⣀⠀⠀⢀⣤⠖⠛⢿⣇⠐⡾⣷⣿⡟⢚⣿⣷⣿⠶⠋⠁⠀⠀
+⠀⠀⠀⠀⠀⠈⠙⠛⠛⠻⠾⢿⣾⣮⣗⣸⣿⣆⠄⠀⠙⣦⡖⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢉⣷⡟⠀⡀⢨⣽⣿⣽⣶⢿⡿⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠛⠉⠙⠻⢿⣷⣶⡂⣸⡟⠓⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠞⠛⣧⣄⣿⣾⣿⡋⠉⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠟⠁⠀⠀⠀⣠⠾⣿⣿⣿⣿⡁⠀⠈⢳⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⠀⠀⣿⣿⣿⣫⣶⠟⢦⡀⠀⠀⣀⠹⣆⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⡼⢿⡷⣾⠀⢀⡞⠁⠀⠹⡄⢻⣿⣿⡆⠀⠘⣿⣦⣤⣀⣀⠀⠀⣀⣀⣤⣶⣿⡯⠀⢀⣾⣿⡿⠋⢀⡞⠀⠀⠙⢆⣀⣿⣻⣯⣷⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⡾⠷⠛⢳⡞⣻⠋⠀⠀⠀⠀⢳⡀⢻⣿⣿⣦⣠⣿⡯⣷⡉⣽⠿⠿⠟⠉⣹⡯⣿⣷⣤⣾⣿⣿⠁⠀⣼⠃⠀⠀⠀⠈⠻⡍⠏⠁⠉⢷⡀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⡾⠁⠀⠀⠈⡱⠁⠀⠀⠀⠀⠀⠈⢷⠈⣿⣿⣿⠟⣿⣇⡝⣮⡈⠀⠀⠀⣴⡟⠀⢿⡟⢿⣻⣿⣇⠀⣰⠇⠀⠀⠀⠀⠀⠀⠙⡄⠀⠀⠀⢿⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⣼⠇⠀⠀⠀⡼⠃⠀⠀⠀⣀⣀⣠⣤⣼⠿⣿⢿⠃⣰⠋⠈⠁⢻⡙⢶⣴⠟⣹⠃⠀⠀⠱⡄⢹⣿⣟⠲⢿⠤⠤⣤⣤⣀⡀⠀⠀⠸⡆⠀⠀⠈⣧⠀⠀⠀
+⠀⠀⠀⠀⢠⡏⠀⠀⠀⣰⣃⣤⠖⠋⣉⡡⢆⣠⠟⠁⣼⣿⡿⢸⣇⠶⠊⠀⢸⣷⠛⠉⢳⣿⠀⠀⠐⢶⠹⡌⣿⡿⣆⠈⠱⢦⡐⠦⣄⣉⣙⣶⣄⣹⡀⠀⠀⢸⡇⠀⠀
+⠀⠀⠀⠀⣾⠀⠀⢰⣶⣿⣿⣿⡿⢿⣥⣶⣟⣁⣠⣞⣽⠟⡇⢸⣿⡀⣀⡴⠋⢹⡄⠀⣸⣉⣻⣦⣄⣸⣰⡇⣿⢹⣮⣷⣤⣤⣿⠿⠞⣛⣿⣿⣿⣿⡿⠂⠀⠀⢿⠀⠀
+⠀⠀⠀⠀⡟⠀⠀⠀⢹⠋⠳⢿⣿⣷⡶⠦⢭⣽⣾⣿⡟⠰⢷⣘⣿⠁⠿⠋⠉⠙⣿⠉⡿⠉⠉⠉⠏⢩⣿⢠⣟⣐⣿⣿⢷⣾⣷⣒⣩⣿⠿⠟⠉⠀⢱⠀⠀⠀⢸⠀⠀
+⠀⠀⠀⢠⡇⠀⠀⠀⢸⠀⠀⠀⠈⠙⠻⠿⢿⣿⣿⣿⡟⣠⣾⣳⣽⣷⣦⢠⠄⣖⢹⣿⠃⠃⠠⠂⣰⣿⣿⢿⣧⣄⣻⣿⣿⣛⠟⠛⠋⠀⠀⠀⠀⠀⢸⡄⠀⠀⢸⡇⠀
+⠀⠀⠀⢸⡇⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⢀⣸⠿⠋⢻⣿⣿⣿⣿⡽⣽⣾⣿⣦⣬⠞⠏⠀⢤⣼⣿⣿⣿⢱⣿⣿⣿⣿⡆⠈⠙⠲⣤⡀⠀⠀⠀⠀⠀⢸⡇⠀⠀⢸⡇⠀
+⠀⠀⠀⠀⡇⢰⣄⣤⣾⠀⠀⠀⢀⣠⠶⠋⠁⠀⢀⣾⣿⢿⣿⣾⣇⢹⡏⣻⣿⠞⠀⠀⠀⠰⣿⣏⣸⡇⣾⣿⣿⣿⣿⣿⠀⠀⠀⠀⠙⠳⢦⣀⠀⠀⢸⢳⣦⡞⢸⡇⠀
+⠀⠀⠀⠀⣷⡼⣯⡽⢿⣆⣤⣞⣋⣀⣀⣀⣀⣀⣸⣿⣿⣧⠬⠹⣯⣬⣿⠉⠹⣄⠀⠀⠀⣰⠏⠉⣿⢤⣿⠟⠲⣾⣿⣻⣧⣤⣤⣤⡤⠤⠤⠽⠿⢦⡼⠛⣷⠛⢿⠀⠀
+⠀⠀⠀⠀⢻⡄⠘⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣷⣄⠀⢻⣿⠏⢦⠀⠈⠐⠀⠸⡁⠀⡟⠙⣿⠟⠀⣠⣾⣿⣾⠃⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇⠀⠙⢀⡿⠀⠀
+⠀⠀⠀⠀⠘⣇⠀⠀⠀⠈⡇⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣷⣄⠿⣄⠈⢿⡆⠀⠀⠀⢴⡿⠀⣠⠟⣠⣾⣿⢿⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠀⠀⠀⣸⠇⠀⠀
+⠀⠀⠀⠀⠀⢹⡆⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⢿⣶⡈⢦⢸⡇⠀⢠⠀⢸⡇⠐⢁⣼⣿⢿⣯⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠁⠀⠀⢠⡏⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢻⡄⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢶⣿⣿⣳⠀⠀⡇⠀⣼⠀⢸⡇⠀⣜⣿⣹⠶⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠁⠀⠀⢀⡿⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀⠀⠀⠈⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⣯⡃⢸⡇⠀⢹⠂⠈⡇⠀⣿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠀⠀⠀⢠⡞⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⠷⣼⠃⠀⠀⠀⠀⢷⡰⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⣠⠟⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣄⠀⠀⠀⠀⠙⢦⣀⠀⠀⠀⠀⠀⠀⠀⢿⣴⣿⣦⣀⣠⣀⣤⣿⣧⢾⠆⠀⠀⠀⠀⠀⠀⠀⣠⠶⠃⠀⠀⠀⢀⡼⠋⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⣆⣉⣷⢦⣀⠀⠀⠀⠀⢸⡜⠿⣷⣿⣿⠿⣽⡿⠛⡞⠀⠀⠀⠀⢀⣠⣴⢊⣁⠀⠀⠀⢀⣴⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠦⣄⣠⢿⣩⡷⡄⠈⠙⠓⠤⢤⣀⣙⣦⣈⣻⣦⣾⣁⣠⣞⣁⣀⠤⠴⠚⠋⣀⣿⣻⣧⡀⣀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠦⣟⡀⠀⠀⠀⠀⠀⠀⠀⠉⠉⢿⡿⠷⣿⢿⡯⠉⠉⠀⠀⠀⠀⠀⠉⠉⣿⡾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠶⣄⣀⡀⠀⠀⠀⠀⠀⠙⣶⡿⢸⠇⠀⠀⠀⠀⣀⣠⠴⠞⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠒⠒⠲⢾⣟⡥⠿⠒⠒⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`
+        ];
+
+        let asciiIndex = 0;
+        const asciiBox = document.getElementById('asciiBox');
+
+        function showAscii() {
+            asciiBox.classList.add('fade');
+            setTimeout(() => {
+                asciiBox.textContent = asciiArts[asciiIndex];
+                asciiBox.classList.remove('fade');
+                asciiIndex = (asciiIndex + 1) % asciiArts.length;
+            }, 800);
+        }
+        showAscii();
+        setInterval(showAscii, 5000);
+
+        // Animasi Ngetik di Terminal
+        const text = "uname -a";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById('typing').innerHTML += text.charAt(i);
+                i++; setTimeout(typeWriter, 80);
+            }
+        }
+        setTimeout(typeWriter, 1000);
+
+        // Jam & Tanggal Real-time
+        function showTime() {
+            const now = new Date(); let h = now.getHours();
+            const m = now.getMinutes().toString().padStart(2, '0');
+            const s = now.getSeconds().toString().padStart(2, '0');
+            const ampm = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12;
+            document.getElementById('clock').textContent = `${h}:${m}:${s} ${ampm}`;
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+        }
+        setInterval(showTime, 500); showTime();
+    </script>
+
+    <!-- Script Matrix Rain -->
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let x = 0; x < columns; x++) { drops[x] = 1; }
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+    </script>
+
+    <!-- Script Jumpscare Anime -->
+    <script>
+        const glitchImg = document.getElementById('glitch-img');
+        const mainContent = document.getElementById('main-content');
+        setInterval(() => {
+            mainContent.style.opacity = '0'; 
+            glitchImg.style.opacity = '1'; 
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+                glitchImg.style.opacity = '0';
+            }, 2000); 
+        }, 3000);
+    </script>
+</body>
+</html>
