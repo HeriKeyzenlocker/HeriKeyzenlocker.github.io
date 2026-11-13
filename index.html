@@ -158,10 +158,8 @@
 </head>
 <body>
 
-    <!-- Canvas Matrix Rain -->
     <canvas id="matrix"></canvas>
 
-    <!-- Gambar Jumpscare -->
     <div id="glitch-img" style="
         position: fixed; top: 0; left: 0;
         width: 100vw; height: 100vh;
@@ -170,7 +168,6 @@
         z-index: 9999; opacity: 0; pointer-events: none;
     "></div>
 
-    <!-- Konten Utama -->
     <div class="content" id="main-content">
         
         <div class="logo-container">
@@ -218,12 +215,11 @@
 
     </div>
 
-    <!-- AUDIO TARUH DI SINI (BUKAN DI HEAD) -->
-    <audio id="bgAudio" loop autoplay>
-        <source src="https://institute-though-treatment-theft.trycloudflare.com/audio/audio_193812.mp3" type="audio/mpeg">
+    <!-- AUDIO BARU LU DI SINI -->
+    <audio id="bgAudio" loop autoplay crossorigin="anonymous">
+        <source src="https://cited-remove-runner-anonymous.trycloudflare.com/audio/audio_204000.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Script Matrix Rain -->
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
@@ -249,7 +245,6 @@
         setInterval(draw, 33);
     </script>
 
-    <!-- Script Jumpscare Anime -->
     <script>
         const glitchImg = document.getElementById('glitch-img');
         const mainContent = document.getElementById('main-content');
@@ -263,24 +258,22 @@
         }, 3000);
     </script>
 
-    <!-- SCRIPT LOGIKA AUDIO & VISUALIZER (DIAMBIL DARI HTML PEMANGGIL) -->
+    <!-- LOGIKA AUDIO & VISUALIZER -->
     <script>
         (function() {
             const audio = document.getElementById('bgAudio');
             const visualizer = document.getElementById('visualizer');
             const bars = visualizer.querySelectorAll('.bar');
             
-            // Set volume biar ga kaget
             audio.volume = 0.6;
 
-            // 1. LOGIKA AUTOPLAY (Dari kode Khilafah Hackers)
+            // 1. LOGIKA AUTOPLAY
             audio.play().catch(() => {
                 const enableAudio = () => {
                     audio.play();
                     document.removeEventListener('click', enableAudio);
                     document.removeEventListener('touchstart', enableAudio);
                 };
-                // Pasang listener di seluruh layar
                 document.addEventListener('click', enableAudio);
                 document.addEventListener('touchstart', enableAudio);
             });
