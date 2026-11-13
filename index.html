@@ -16,7 +16,7 @@
             width: 100%;
             min-height: 100%;
             font-family: 'Share Tech Mono', monospace;
-            /* Background pakai link Catbox baru lu */
+            /* Background Catbox lu */
             background: url('https://files.catbox.moe/wnsqeh.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
@@ -31,7 +31,7 @@
             top: 0;
             left: 0;
             z-index: 1;
-            opacity: 0.3;
+            opacity: 0.4; /* Matrix rain dibikin agak tebel dikit biar keliatan */
             pointer-events: none;
             filter: drop-shadow(0 0 3px #0f0);
         }
@@ -39,51 +39,34 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            padding: 30px 15px 40px;
-            max-width: 95vw;
+            padding: 40px 20px;
+            max-width: 90vw;
             width: 100%;
             box-sizing: border-box;
-            background: rgba(0,0,0,0.75); /* Transparansi gelap biar teks tetep kebaca */
+            background: rgba(0,0,0,0.7); /* Transparansi gelap biar teks kebaca */
             border-radius: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 40px;
+            margin-bottom: 40px;
         }
-        .ascii-terminal {
-            color: #0f0;
-            font-size: 3.5px;
-            line-height: 1.02;
-            text-shadow: 0 0 6px #0f0;
-            white-space: pre;
-            font-family: monospace;
-            text-align: left;
-            overflow-x: auto;
-            padding: 10px 5px;
-            margin: 0;
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease;
-        }
-        .ascii-terminal.fade { opacity: 0; }
 
+        /* LOGO PROFIL LU */
         img.logo {
-            width: clamp(160px, 35vw, 220px);
-            height: clamp(160px, 35vw, 220px);
+            width: clamp(180px, 40vw, 250px);
+            height: clamp(180px, 40vw, 250px);
             border-radius: 50%;
             border: 3px solid red;
             box-shadow: 0 0 30px red, 0 0 60px rgba(255,0,0,0.5);
             display: block;
-            margin: 20px auto;
+            margin: 0 auto 20px;
             object-fit: cover;
             animation: pulse 2s infinite;
-            /* Logo fallback avatar hacker */
-            background: #111 url('https://cdn-icons-png.flaticon.com/512/2102/2102633.png') center/cover;
+            background: #111; /* Fallback kalau gambar loading */
         }
         @keyframes pulse {
             0%, 100% { box-shadow: 0 0 30px red, 0 0 60px rgba(255,0,0,0.5); }
             50% { box-shadow: 0 0 50px red, 0 0 90px rgba(255,0,0,0.8); }
         }
+
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
@@ -112,36 +95,23 @@
             40% { transform: translate(3px, 2px); } 60% { transform: translate(-3px, -2px); }
             80% { transform: translate(-3px, 2px); } 100% { transform: translate(0); }
         }
+        
         p { font-size: 0.95rem; margin: 10px 0; }
         .highlight { color: red; font-weight: bold; }
-        .terminal {
-            background: #0a0a0a;
-            border-radius: 10px;
-            border: 1px solid #333;
-            max-width: 95vw;
-            margin: 20px auto;
-            overflow: hidden;
-            box-shadow: 0 0 40px rgba(0,255,0,0.2);
+        
+        /* GAYA TERMINAL NGETIK TANPA KOTAK */
+        .typing-box {
+            color: #0f0;
+            font-family: monospace;
+            font-size: 14px;
             text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+            text-shadow: 0 0 5px #0f0;
         }
-        .terminal-bar {
-            background: #1a1a1a;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .dot.red { background: #ff5f56; }
-        .dot.yellow { background: #ffbd2e; }
-        .dot.green { background: #27c93f; }
-        .terminal-title { color: #888; font-size: 11px; margin-left: 10px; }
-        .terminal-body {
-            padding: 12px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 13px;
-            line-height: 1.8;
-        }
+        .blink { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
         .hacklog {
             background: rgba(0,0,0,0.9);
             border: 1px solid #0f0;
@@ -150,7 +120,7 @@
             font-family: monospace;
             font-size: 12px;
             color: #0f0;
-            height: 180px;
+            height: 150px;
             overflow: hidden;
             max-width: 95vw;
             margin: 20px auto;
@@ -159,6 +129,7 @@
         }
         .hacklog div { animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateX(-5px); } to { opacity: 1; transform: translateX(0); } }
+        
         #breach {
             position: fixed;
             top: 20px;
@@ -192,8 +163,6 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
-        .blink { animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
         .btn {
             padding: 12px 24px;
             margin: 10px;
@@ -211,42 +180,26 @@
         .btn:hover { background: red; color: black; }
         #clock, #date { margin-top: 15px; font-size: 1.1rem; color: #0f0; }
         .footer { font-size: 0.75rem; color: #888; margin-top: 30px; padding-bottom: 20px; }
+        
         @media (max-width: 600px) {
             h1 { font-size: 1.3rem; }
             p { font-size: 0.85rem; }
-            .ascii-terminal { font-size: 2.5px; min-height: 200px; }
-            .terminal-body { font-size: 11px; padding: 10px; }
-            .hacklog { font-size: 10px; height: 150px; }
+            .typing-box { font-size: 12px; text-align: center; }
+            .hacklog { font-size: 10px; height: 120px; }
         }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
+    <!-- Matrix Rain Full Screen -->
     <canvas id="matrixCanvas"></canvas>
 
     <div id="breach">⚠️ SYSTEM BREACH DETECTED — ACCESS GRANTED</div>
 
     <div class="content">
 
-        <div class="terminal">
-            <div class="terminal-bar">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
-                <span class="terminal-title">herikeyzenlocker@cyber-explore:~</span>
-            </div>
-            <div class="terminal-body">
-                <div style="color:#0f0; font-size: 12px; margin-bottom: 8px;">┌──[herikeyzenlocker@banjaran-sudom]─[~]</div>
-                <div style="color:#0f0; font-size: 12px; margin-bottom: 10px;">└─$ cat cyber-explore.txt</div>
-
-                <pre class="ascii-terminal" id="asciiBox"></pre>
-
-                <div style="color:#0f0; font-size: 12px; margin-top: 10px;">└─$ <span id="typing"></span><span class="blink">█</span></div>
-            </div>
-        </div>
-
-        <!-- Ganti URL img src ini kalau lu udah upload foto lu sendiri ke GitHub -->
-        <img src="" class="logo" alt="HeriKeyzenlocker">
+        <!-- LOGO ASLI LU BALIK LAGI -->
+        <img src="https://files.catbox.moe/eyxe1p.jpg" class="logo" alt="HeriKeyzenlocker">
 
         <h1 data-text="CYBER EXPLORE — HERIKEYZENLOCKER👑">CYBER EXPLORE — HERIKEYZENLOCKER👑</h1>
 
@@ -264,6 +217,12 @@
 
         <div style="margin-top: 20px; font-size: 1.05rem; color: red; text-shadow: 0 0 5px white;">
             "Belajar Tanpa Batas, Berkarya Tanpa Henti."
+        </div>
+
+        <!-- EFEK NGETIK TERMINAL (DIPINDAH KE SINI) -->
+        <div class="typing-box">
+            ┌──[herikeyzenlocker@banjaran-sudom]─[~]<br>
+            └─$ <span id="typing"></span><span class="blink">█</span>
         </div>
 
         <div class="hacklog" id="hacklog"></div>
@@ -293,81 +252,19 @@
     </div>
 
     <script>
-        // ================== 3 ASCII ART (MUTER) ==================
-        const asciiArts = [
-` ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
- ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
- ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
- ⠀⠀⢤⣀⣀⣀⠀⠀⢸⣷⡄⠀⣁⣀⣤⣴⣿⣿⣿⣆
- ⠀⠀⠀⠀⠹⠏⠀⠀⠀⣿⣧⠀⠹⣿⣿⣿⣿⣿⡿⣿
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⠇⢀⣼⣿⣿⠛⢯⡿⡟
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠦⠴⢿⢿⣿⡿⠷⠀⣿⠀
- ⠀⠀⠀⠀⠀⠀⠀⠙⣷⣶⣶⣤⣤⣤⣤⣤⣶⣦⠃⠀
- ⠀⠀⠀⠀⠀⠀⠀⢐⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
- ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁`,
-
-`⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠁  ⠈⠉⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟         ⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⡟            ⠈⢻⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⡟     ⢀⣠⣤⣤⣤⣤⣄   ⠹⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⠁    ⠾⣿⣿⣿⣿⠿⠛⠉    ⠘⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⡏   ⣤⣶⣤⣉⣿⣿⡯⣀⣴⣿⡗    ⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⡇   ⡈  ⠉⣿⣿⣶⡉  ⣀⡀   ⢻⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⡇  ⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇   ⢸⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿   ⠉⢉⣽⣿⠿⣿⡿⢻⣯⡍⢁⠄   ⣸⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⡄  ⠐⡀⢉⠉ ⠠ ⢉⣉ ⡜    ⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⠿⠁   ⠘⣤⣭⣟⠛⠛⣉⣁⡜     ⠛⠿⣿⣿⣿
-⡿⠟⠛⠉⠉       ⠈⢻⣿⡀ ⣿⠏         ⠈⠉
-              ⠉⠁ ⠁`,
-
-`⢰⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼
-⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⠴⠶⠖⠒⠛⣿⣽⡟⠛⠓⠒⠶⠶⢤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠴⣯⠏
-⠀⠀⢿⣯⣿⠷⣶⣤⡴⣶⣶⣤⠤⠤⣤⣄⡀⠀⣀⡤⠶⠛⠉⠀⠀⠀⠀⠀⠀⠴⠿⣼⠿⠦⠀⠀⠀⠀⠀⠀⠉⠛⠲⢦⣄⣀⣤⣴⠒⣻⣿⣿⢻⣿⣿⣿⠋⣩⣴⠋⠀
-⠀⠀⠀⠙⠿⣦⣼⣟⢷⣷⢹⣿⣌⣿⡟⢺⣿⠛⠻⣄⠀⠀⠀⠀⢀⣠⣤⠤⠖⠒⠒⠛⠒⠒⠒⠦⠤⣤⣀⠀⠀⢀⣤⠖⠛⢿⣇⠐⡾⣷⣿⡟⢚⣿⣷⣿⠶⠋⠁⠀⠀
-⠀⠀⠀⠀⠀⠈⠙⠛⠛⠻⠾⢿⣾⣮⣗⣸⣿⣆⠄⠀⠙⣦⡖⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢉⣷⡟⠀⡀⢨⣽⣿⣽⣶⢿⡿⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠛⠉⠙⠻⢿⣷⣶⡂⣸⡟⠓⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠞⠛⣧⣄⣿⣾⣿⡋⠉⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠟⠁⠀⠀⠀⣠⠾⣿⣿⣿⣿⡁⠀⠈⢳⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⠀⠀⣿⣿⣿⣫⣶⠟⢦⡀⠀⠀⣀⠹⣆⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢀⡼⢿⡷⣾⠀⢀⡞⠁⠀⠹⡄⢻⣿⣿⡆⠀⠘⣿⣦⣤⣀⣀⠀⠀⣀⣀⣤⣶⣿⡯⠀⢀⣾⣿⡿⠋⢀⡞⠀⠀⠙⢆⣀⣿⣻⣯⣷⡀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢀⡾⠷⠛⢳⡞⣻⠋⠀⠀⠀⠀⢳⡀⢻⣿⣿⣦⣠⣿⡯⣷⡉⣽⠿⠿⠟⠉⣹⡯⣿⣷⣤⣾⣿⣿⠁⠀⣼⠃⠀⠀⠀⠈⠻⡍⠏⠁⠉⢷⡀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⡾⠁⠀⠀⠈⡱⠁⠀⠀⠀⠀⠀⠈⢷⠈⣿⣿⣿⠟⣿⣇⡝⣮⡈⠀⠀⠀⣴⡟⠀⢿⡟⢿⣻⣿⣇⠀⣰⠇⠀⠀⠀⠀⠀⠀⠙⡄⠀⠀⠀⢿⡀⠀⠀⠀
-⠀⠀⠀⠀⠀⣼⠇⠀⠀⠀⡼⠃⠀⠀⠀⣀⣀⣠⣤⣼⠿⣿⢿⠃⣰⠋⠈⠁⢻⡙⢶⣴⠟⣹⠃⠀⠀⠱⡄⢹⣿⣟⠲⢿⠤⠤⣤⣤⣀⡀⠀⠀⠸⡆⠀⠀⠈⣧⠀⠀⠀
-⠀⠀⠀⠀⢠⡏⠀⠀⠀⣰⣃⣤⠖⠋⣉⡡⢆⣠⠟⠁⣼⣿⡿⢸⣇⠶⠊⠀⢸⣷⠛⠉⢳⣿⠀⠀⠐⢶⠹⡌⣿⡿⣆⠈⠱⢦⡐⠦⣄⣉⣙⣶⣄⣹⡀⠀⠀⢸⡇⠀⠀
-⠀⠀⠀⠀⣾⠀⠀⢰⣶⣿⣿⣿⡿⢿⣥⣶⣟⣁⣠⣞⣽⠟⡇⢸⣿⡀⣀⡴⠋⢹⡄⠀⣸⣉⣻⣦⣄⣸⣰⡇⣿⢹⣮⣷⣤⣤⣿⠿⠞⣛⣿⣿⣿⣿⡿⠂⠀⠀⢿⠀⠀
-⠀⠀⠀⠀⡟⠀⠀⠀⢹⠋⠳⢿⣿⣷⡶⠦⢭⣽⣾⣿⡟⠰⢷⣘⣿⠁⠿⠋⠉⠙⣿⠉⡿⠉⠉⠉⠏⢩⣿⢠⣟⣐⣿⣿⢷⣾⣷⣒⣩⣿⠿⠟⠉⠀⢱⠀⠀⠀⢸⠀⠀
-⠀⠀⠀⢠⡇⠀⠀⠀⢸⠀⠀⠀⠈⠙⠻⠿⢿⣿⣿⣿⡟⣠⣾⣳⣽⣷⣦⢠⠄⣖⢹⣿⠃⠃⠠⠂⣰⣿⣿⢿⣧⣄⣻⣿⣿⣛⠟⠛⠋⠀⠀⠀⠀⠀⢸⡄⠀⠀⢸⡇⠀
-⠀⠀⠀⢸⡇⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⢀⣸⠿⠋⢻⣿⣿⣿⣿⡽⣽⣾⣿⣦⣬⠞⠏⠀⢤⣼⣿⣿⣿⢱⣿⣿⣿⣿⡆⠈⠙⠲⣤⡀⠀⠀⠀⠀⠀⢸⡇⠀⠀⢸⡇⠀
-⠀⠀⠀⠀⡇⢰⣄⣤⣾⠀⠀⠀⢀⣠⠶⠋⠁⠀⢀⣾⣿⢿⣿⣾⣇⢹⡏⣻⣿⠞⠀⠀⠀⠰⣿⣏⣸⡇⣾⣿⣿⣿⣿⣿⠀⠀⠀⠀⠙⠳⢦⣀⠀⠀⢸⢳⣦⡞⢸⡇⠀
-⠀⠀⠀⠀⣷⡼⣯⡽⢿⣆⣤⣞⣋⣀⣀⣀⣀⣀⣸⣿⣿⣧⠬⠹⣯⣬⣿⠉⠹⣄⠀⠀⠀⣰⠏⠉⣿⢤⣿⠟⠲⣾⣿⣻⣧⣤⣤⣤⡤⠤⠤⠽⠿⢦⡼⠛⣷⠛⢿⠀⠀
-⠀⠀⠀⠀⢻⡄⠘⠃⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣷⣄⠀⢻⣿⠏⢦⠀⠈⠐⠀⠸⡁⠀⡟⠙⣿⠟⠀⣠⣾⣿⣾⠃⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇⠀⠙⢀⡿⠀⠀
-⠀⠀⠀⠀⠘⣇⠀⠀⠀⠈⡇⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣷⣄⠿⣄⠈⢿⡆⠀⠀⠀⢴⡿⠀⣠⠟⣠⣾⣿⢿⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⡞⠀⠀⠀⣸⠇⠀⠀
-⠀⠀⠀⠀⠀⢹⡆⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⢿⣶⡈⢦⢸⡇⠀⢠⠀⢸⡇⠐⢁⣼⣿⢿⣯⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼⠁⠀⠀⢠⡏⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢻⡄⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢶⣿⣿⣳⠀⠀⡇⠀⣼⠀⢸⡇⠀⣜⣿⣹⠶⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠁⠀⠀⢀⡿⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀⠀⠀⠈⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⣯⡃⢸⡇⠀⢹⠂⠈⡇⠀⣿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠀⠀⠀⢠⡞⠁⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⠷⣼⠃⠀⠀⠀⠀⢷⡰⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠔⠁⠀⠀⠀⣠⠟⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣄⠀⠀⠀⠀⠙⢦⣀⠀⠀⠀⠀⠀⠀⠀⢿⣴⣿⣦⣀⣠⣀⣤⣿⣧⢾⠆⠀⠀⠀⠀⠀⠀⠀⣠⠶⠃⠀⠀⠀⢀⡼⠋⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⣆⣉⣷⢦⣀⠀⠀⠀⠀⢸⡜⠿⣷⣿⣿⠿⣽⡿⠛⡞⠀⠀⠀⠀⢀⣠⣴⢊⣁⠀⠀⠀⢀⣴⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠦⣄⣠⢿⣩⡷⡄⠈⠙⠓⠤⢤⣀⣙⣦⣈⣻⣦⣾⣁⣠⣞⣁⣀⠤⠴⠚⠋⣀⣿⣻⣧⡀⣀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠦⣟⡀⠀⠀⠀⠀⠀⠀⠀⠉⠉⢿⡿⠷⣿⢿⡯⠉⠉⠀⠀⠀⠀⠀⠉⠉⣿⡾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠶⣄⣀⡀⠀⠀⠀⠀⠀⠙⣶⡿⢸⠇⠀⠀⠀⠀⣀⣠⠴⠞⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠛⠒⠒⠲⢾⣟⡥⠿⠒⠒⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`
-        ];
-
-        let asciiIndex = 0;
-        const asciiBox = document.getElementById('asciiBox');
-
-        function showAscii() {
-            asciiBox.classList.add('fade');
-            setTimeout(() => {
-                asciiBox.textContent = asciiArts[asciiIndex];
-                asciiBox.classList.remove('fade');
-                asciiIndex = (asciiIndex + 1) % asciiArts.length;
-            }, 800);
+        // Animasi Ngetik (Whoami)
+        const text = "whoami && echo 'Raja Setan dari Banjaran Sudom' && uname -a";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById('typing').innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 80);
+            }
         }
-        showAscii();
-        setInterval(showAscii, 5000);
+        setTimeout(typeWriter, 1000);
 
+        // Jam & Tanggal
         function showTime() {
             const now = new Date();
             let h = now.getHours();
@@ -381,6 +278,7 @@
         }
         setInterval(showTime, 500); showTime();
 
+        // Matrix Rain Full Screen
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         const fontSize = 16;
@@ -405,17 +303,7 @@
         initMatrix(); setInterval(drawMatrix, 33);
         window.addEventListener('resize', initMatrix);
 
-        const text = "whoami && echo 'Raja Setan dari Banjaran Sudom' && uname -a";
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById('typing').innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80);
-            }
-        }
-        setTimeout(typeWriter, 1000);
-
+        // Hack Log
         const logs = [
             "[+] Initializing Cyber Explore v98.1...",
             "[+] Loading modules: NETWORK_AUDIT... OK",
@@ -436,11 +324,12 @@
             line.textContent = logs[idx % logs.length];
             box.appendChild(line);
             idx++;
-            if (box.children.length > 10) box.removeChild(box.firstChild);
+            if (box.children.length > 8) box.removeChild(box.firstChild);
             setTimeout(addLog, 800);
         }
         setTimeout(addLog, 1500);
 
+        // Notifikasi Breach
         setTimeout(() => {
             const breach = document.getElementById('breach');
             breach.style.display = 'block';
