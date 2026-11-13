@@ -72,6 +72,25 @@
             object-fit: cover;
         }
 
+        /* Visualizer Audio */
+        .audio-visualizer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 3px;
+            height: 30px;
+            margin-top: -5px;
+            margin-bottom: 5px;
+        }
+        .bar {
+            width: 4px;
+            background: #0f0;
+            border-radius: 2px;
+            box-shadow: 0 0 8px #0f0;
+            height: 5px; 
+            transition: height 0.1s ease;
+        }
+
         /* Judul */
         .title {
             font-size: 28px;
@@ -172,6 +191,9 @@
 </head>
 <body>
 
+    <!-- Audio Lu -->
+    <audio id="lagu" src="https://institute-though-treatment-theft.trycloudflare.com/audio/audio_193812.mp3" autoplay loop crossorigin="anonymous"></audio>
+
     <!-- Canvas Matrix Rain -->
     <canvas id="matrix"></canvas>
 
@@ -180,7 +202,7 @@
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background-image: url('https://files.catbox.moe/wnsqeh.jpg'); /* LINK ANIME UDAH BENER */
+        background-image: url('https://files.catbox.moe/wnsqeh.jpg');
         background-size: cover;
         background-position: center;
         z-index: 9999;
@@ -195,6 +217,15 @@
         <div class="logo-container">
             <img src="https://files.catbox.moe/eyxe1p.jpg" alt="Logo">
         </div>
+
+        <!-- Visualizer Audio -->
+        <div class="audio-visualizer" id="visualizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+
+        <p style="font-size: 10px; color: #888;">(Sentuh/Klik layar jika musik belum berputar)</p>
 
         <!-- Judul -->
         <div>
@@ -231,7 +262,7 @@
         <p style="font-size: 11px; margin-top: 5px;">We Explore The Digital World Since 2022.</p>
 
         <!-- Tombol -->
-        <a href="#" class="btn">Ngobrol Santuy Sama Bos</a>
+        <a href="https://t.me/+gwdAGj6qGGkyMGM1" class="btn">Ngobrol Santuy Sama Bos</a>
 
         <!-- Tagline -->
         <p class="tagline">Tagline #CYBER_EXPLORE #HERIKEYZENLOCKER</p>
@@ -242,31 +273,22 @@
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
         const fontSize = 14;
         const columns = canvas.width / fontSize;
-
         const drops = [];
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1; 
-        }
-
+        for (let x = 0; x < columns; x++) { drops[x] = 1; }
         function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#0F0';
             ctx.font = fontSize + 'px monospace';
-
             for (let i = 0; i < drops.length; i++) {
                 const text = letters.charAt(Math.floor(Math.random() * letters.length));
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
                 drops[i]++;
             }
         }
@@ -279,17 +301,56 @@
         const mainContent = document.getElementById('main-content');
 
         setInterval(() => {
-            // 1. Sembunyiin Web, Munculin Anime
             mainContent.style.opacity = '0'; 
             glitchImg.style.opacity = '1'; 
-            
-            // 2. Anime bertahan 2 detik (2000ms), lalu balik ke Web
             setTimeout(() => {
                 mainContent.style.opacity = '1';
                 glitchImg.style.opacity = '0';
             }, 2000); 
+        }, 3000);
+    </script>
+
+    <!-- SCRIPT BUAT NGUBAH AUDIO & VISUALIZER -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const audio = document.getElementById('lagu');
+            const visualizer = document.getElementById('visualizer');
+            const bars = visualizer.querySelectorAll('.bar');
             
-        }, 3000); // Siklus: Tiap 3 detik sekali kedip
+            // 1. PEMBUKA BLOKIRAN AUTOPLAY (Nunggu klik pertama)
+            const playAudio = () => { 
+                audio.play().catch(() => {}); 
+                document.removeEventListener('click', playAudio); 
+            };
+            document.addEventListener('click', playAudio);
+
+            // 2. SETUP WEB AUDIO API BUAT VISUALIZER
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const analyser = audioCtx.createAnalyser();
+            const source = audioCtx.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            analyser.fftSize = 64; 
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            function animateBars() {
+                requestAnimationFrame(animateBars);
+                analyser.getByteFrequencyData(dataArray);
+                
+                if (audio.paused) {
+                    bars.forEach(bar => bar.style.height = '5px');
+                    return;
+                }
+
+                bars.forEach((bar, index) => {
+                    let value = dataArray[index] / 2; 
+                    if (value < 5) value = 5; 
+                    bar.style.height = `${value}px`;
+                });
+            }
+            animateBars();
+        });
     </script>
 </body>
 </html>
