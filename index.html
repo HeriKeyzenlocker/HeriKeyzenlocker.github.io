@@ -7,9 +7,7 @@
     <meta name="description" content="Cyber Explore by HeriKeyzenlocker — Eksplorasi dunia digital dari sudut negeri.">
     <meta property="og:title" content="Cyber Explore — HeriKeyzenlocker👑">
     <meta property="og:description" content="Cyber Explore — Lab pribadi, riset keamanan, dan edukasi oleh HeriKeyzenlocker.">
-    <meta property="og:image" content="https://files.catbox.moe/eyxe1p.jpg">
     <meta name="theme-color" content="#ff0000">
-    <link rel="icon" href="https://files.catbox.moe/eyxe1p.jpg" type="image/jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         html, body {
@@ -18,8 +16,8 @@
             width: 100%;
             min-height: 100%;
             font-family: 'Share Tech Mono', monospace;
-            /* Background pakai link catbox lu */
-            background: url('https://files.catbox.moe/buojrv.jpg') no-repeat center center fixed;
+            /* Background pakai link Catbox baru lu */
+            background: url('https://files.catbox.moe/wnsqeh.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
             display: flex;
@@ -45,8 +43,7 @@
             max-width: 95vw;
             width: 100%;
             box-sizing: border-box;
-            /* Gua naikin transparansinya jadi 0.75 biar teks makin jelas di background merah */
-            background: rgba(0,0,0,0.75); 
+            background: rgba(0,0,0,0.75); /* Transparansi gelap biar teks tetep kebaca */
             border-radius: 15px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -80,6 +77,8 @@
             margin: 20px auto;
             object-fit: cover;
             animation: pulse 2s infinite;
+            /* Logo fallback avatar hacker */
+            background: #111 url('https://cdn-icons-png.flaticon.com/512/2102/2102633.png') center/cover;
         }
         @keyframes pulse {
             0%, 100% { box-shadow: 0 0 30px red, 0 0 60px rgba(255,0,0,0.5); }
@@ -104,20 +103,14 @@
         h1::before { color: #ff0000; animation: glitch-1 0.3s infinite; z-index: -1; }
         h1::after  { color: #00ffff; animation: glitch-2 0.3s infinite; z-index: -2; }
         @keyframes glitch-1 {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 2px); }
-            40% { transform: translate(-3px, -2px); }
-            60% { transform: translate(3px, 2px); }
-            80% { transform: translate(3px, -2px); }
-            100% { transform: translate(0); }
+            0% { transform: translate(0); } 20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(-3px, -2px); } 60% { transform: translate(3px, 2px); }
+            80% { transform: translate(3px, -2px); } 100% { transform: translate(0); }
         }
         @keyframes glitch-2 {
-            0% { transform: translate(0); }
-            20% { transform: translate(3px, -2px); }
-            40% { transform: translate(3px, 2px); }
-            60% { transform: translate(-3px, -2px); }
-            80% { transform: translate(-3px, 2px); }
-            100% { transform: translate(0); }
+            0% { transform: translate(0); } 20% { transform: translate(3px, -2px); }
+            40% { transform: translate(3px, 2px); } 60% { transform: translate(-3px, -2px); }
+            80% { transform: translate(-3px, 2px); } 100% { transform: translate(0); }
         }
         p { font-size: 0.95rem; margin: 10px 0; }
         .highlight { color: red; font-weight: bold; }
@@ -230,9 +223,6 @@
 <body oncontextmenu="return false;">
 
     <canvas id="matrixCanvas"></canvas>
-    
-    <!-- Audio pakai link Cloudflare Tunnel lu -->
-    <audio id="lagu" src="https://millions-island-consumers-necklace.trycloudflare.com/audio/audio_164130.mp3" autoplay loop></audio>
 
     <div id="breach">⚠️ SYSTEM BREACH DETECTED — ACCESS GRANTED</div>
 
@@ -255,7 +245,8 @@
             </div>
         </div>
 
-        <img src="https://files.catbox.moe/eyxe1p.jpg" class="logo" alt="HeriKeyzenlocker">
+        <!-- Ganti URL img src ini kalau lu udah upload foto lu sendiri ke GitHub -->
+        <img src="" class="logo" alt="HeriKeyzenlocker">
 
         <h1 data-text="CYBER EXPLORE — HERIKEYZENLOCKER👑">CYBER EXPLORE — HERIKEYZENLOCKER👑</h1>
 
@@ -292,8 +283,6 @@
                 Ngobrol Santuy Sama Bos
             </button>
         </div>
-        
-        <p style="font-size: 0.75rem; color: #888; margin-top: 10px;">(Klik di mana saja pada layar jika musik belum berputar)</p>
 
         <p>Tagline <span class="highlight">#CYBER_EXPLORE #HERIKEYZENLOCKER #DIGITAL_EXPLORER</span></p>
 
@@ -304,13 +293,6 @@
     </div>
 
     <script>
-        // Autoplay Audio Fix
-        document.addEventListener('DOMContentLoaded', function () {
-            const audio = document.getElementById('lagu');
-            const playAudio = () => { audio.play().catch(() => {}); document.removeEventListener('click', playAudio); };
-            document.addEventListener('click', playAudio);
-        });
-
         // ================== 3 ASCII ART (MUTER) ==================
         const asciiArts = [
 ` ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
